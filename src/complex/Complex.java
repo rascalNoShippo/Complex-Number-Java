@@ -93,8 +93,8 @@ public class Complex extends Number {
      * @return Complexクラス（numberがComplexならそのまま返す、実数（int, floatなど）の場合は虚部は0）
      */
     public static Complex valueOf(Number number) {
-        return number instanceof Complex
-            ? (Complex) number
+        return number instanceof Complex z
+            ? z
             : new Complex(number.doubleValue(), 0);
     }
 
