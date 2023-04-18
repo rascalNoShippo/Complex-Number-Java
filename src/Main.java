@@ -1,8 +1,8 @@
-import Complex.Complex;
+import complex.Complex;
 
 public class Main {
     public static void main(String[] args) {
-        final Complex a = Complex.valueOf("2-i");
-        System.out.println(a);
+        final Complex a = new Complex(1, 2);
+        System.out.println(a.plus(a));
     }
 }
