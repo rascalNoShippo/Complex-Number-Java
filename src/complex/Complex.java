@@ -9,7 +9,7 @@ package complex;
 public class Complex extends Number {
     private final double re;
     private final double im;
-    private static final ArithmeticException ae = new ArithmeticException("/ by zero");
+    private static final ArithmeticException AE = new ArithmeticException("/ by zero");
     public static final Complex ONE = Complex.valueOf(1);
     public static final Complex I = new Complex(0, 1);
 
@@ -193,7 +193,7 @@ public class Complex extends Number {
     public Complex dividedBy(Number divisor) {
         final Complex z = Complex.valueOf(divisor);
         if (z.isZero()) {
-            throw ae;
+            throw AE;
         }
         double denominator = (Math.pow(z.re, 2) + Math.pow(z.im, 2));
         double realResult = (this.re * z.re + this.im * z.im) / denominator;
@@ -227,11 +227,11 @@ public class Complex extends Number {
      */
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Number)) {
-            return false;
+        if (obj instanceof Number n) {
+            final Complex z = Complex.valueOf(n);
+            return this.re == z.re && this.im == z.im;
         }
-        final Complex z = (Complex) obj;
-        return this.re == z.re && this.im == z.im;
+        return false;
     }
 
     /**
@@ -240,10 +240,11 @@ public class Complex extends Number {
      * @return Complex
      */
     public Complex sqrt() {
-        final double c = this.re, d = this.im;
+        final double c = this.re;
+        final double d = this.im;
         final double constant = c + Math.sqrt(Math.pow(c, 2) + Math.pow(d, 2));
-        final double a = Math.sqrt(constant / 2),
-                b = c <= 0 && d == 0 ? Math.sqrt(-c) + 0 : d / Math.sqrt(2 * constant);
+        final double a = Math.sqrt(constant / 2);
+        final double b = c <= 0 && d == 0 ? Math.sqrt(-c) + 0 : d / Math.sqrt(2 * constant);
         return new Complex(a, b);
     }
 
@@ -309,7 +310,7 @@ public class Complex extends Number {
      */
     public double compArg() {
         if (isZero()) {
-            throw ae;
+            throw AE;
         }
         final double x = this.re, y = this.im;
         if (x == 0) {

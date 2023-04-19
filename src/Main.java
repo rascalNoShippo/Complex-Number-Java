@@ -1,9 +1,10 @@
 import complex.Complex;
+import range.Range;
 
 public class Main {
     public static void main(String[] args) {
         final Complex a = new Complex(1, 2);
-        final var v = Void.TYPE;
-        System.out.println(v);
+        final Range r = new Range(1, 2);
+        System.out.println(r.isContained(2));
     }
 }
