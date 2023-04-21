@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dccc1f24-832f-479a-aa95-ed4d00890924" name="変更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/exception/IllegalRangeException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/range/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/range/Range.java" afterDir="false" />
@@ -87,7 +86,7 @@
       <option name="presentableId" value="Default" />
       <updated>1681479213164</updated>
       <workItem from="1681789611555" duration="77000" />
-      <workItem from="1681793283423" duration="30773000" />
+      <workItem from="1681793283423" duration="45004000" />
     </task>
     <servers />
   </component>
@@ -101,11 +100,6 @@
           <url>file://$PROJECT_DIR$/src/complex/Complex.java</url>
           <line>229</line>
           <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>7</line>
-          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
