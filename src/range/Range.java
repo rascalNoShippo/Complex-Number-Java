@@ -54,7 +54,7 @@ public class Range {
      * @param isEndClosed 終点を含むか
      */
     public Range(double start, double end, boolean isStartClosed, boolean isEndClosed) {
-        if (start > end || start == end && !isStartClosed && !isEndClosed) {
+        if (start > end || start == end && !(isStartClosed && isEndClosed)) {
             throw IAE;
         }
         this.start = start;
@@ -154,8 +154,14 @@ public class Range {
         return toSerialIntArr(true);
     }
 
+    /**
+     * 2つの範囲の共通範囲（積集合）
+     * @param range 比較する範囲
+     * @return 共通範囲（共通部分がなければnull）
+     */
     public Range and(Range range) {
-        if (!isContained(range.start) && !range.isContained(this.start)) {
+        if (!isContained(range.start) && !range.isContained(this.start)
+                || !isContained(range.end) && !range.isContained(this.end)) {
             return null;
         }
         final double start = isContained(range.start) ? range.start : this.start;
@@ -164,5 +170,8 @@ public class Range {
         boolean isEndClosed = isContained(range.end) ? range.isEndClosed : this.isEndClosed;
         return new Range(start, end, isStartClosed, isEndClosed);
     }
-
+    public boolean isSingleton() {
+        return this.start == this.end && this.isStartClosed && this.isEndClosed;
+    }
+    
 }

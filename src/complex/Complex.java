@@ -11,7 +11,10 @@ public class Complex extends Number {
     private final double im;
     private static final ArithmeticException AE = new ArithmeticException("/ by zero");
     public static final Complex ONE = Complex.valueOf(1);
+    public static final Complex NEGATIVE_ONE = Complex.valueOf(-1);
     public static final Complex I = new Complex(0, 1);
+
+    public static final Complex ZERO = new Complex();
 
     /**
      * 実部ゲッター
@@ -236,6 +239,7 @@ public class Complex extends Number {
 
     /**
      * 複素数の平方根のうち実部が非負のもの
+     * 負の実数が与えられた場合は虚部が正のもの
      *
      * @return Complex
      */
@@ -244,7 +248,7 @@ public class Complex extends Number {
         final double d = this.im;
         final double constant = c + Math.sqrt(Math.pow(c, 2) + Math.pow(d, 2));
         final double a = Math.sqrt(constant / 2);
-        final double b = c <= 0 && d == 0 ? Math.sqrt(-c) + 0 : d / Math.sqrt(2 * constant);
+        final double b = c <= 0 && d == 0 ? Math.sqrt(-c) : d / Math.sqrt(2 * constant);
         return new Complex(a, b);
     }
 

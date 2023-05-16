@@ -1,10 +1,9 @@
 import complex.Complex;
-import range.Range;
 
-public class Main {
+public class Main{
     public static void main(String[] args) {
-        final Complex a = new Complex(1, 2);
-        final var r = new Range(2, 6, true, false);
-        System.out.println(r.and(new Range(2, 6, false)));
+        Complex z = Complex.valueOf(2);
+        
+        System.out.println();
     }
 }
