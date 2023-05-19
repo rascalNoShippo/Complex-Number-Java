@@ -1,6 +1,8 @@
 package complex;
 
 
+import java.util.Objects;
+
 /**
  * 複素数クラス
  *
@@ -10,10 +12,21 @@ public class Complex extends Number {
     private final double re;
     private final double im;
     private static final ArithmeticException AE = new ArithmeticException("/ by zero");
+    /**
+     * 複素数 “1”
+     */
     public static final Complex ONE = Complex.valueOf(1);
+    /**
+     * 複素数 “-1”
+     */
     public static final Complex NEGATIVE_ONE = Complex.valueOf(-1);
+    /**
+     * 複素数 “i”（虚数単位）
+     */
     public static final Complex I = new Complex(0, 1);
-
+    /**
+     * 複素数 “0”
+     */
     public static final Complex ZERO = new Complex();
 
     /**
@@ -35,15 +48,15 @@ public class Complex extends Number {
     }
 
     public int intValue() {
-        return Double.valueOf(this.re).intValue();
+        return (int) this.re;
     }
 
     public long longValue() {
-        return Double.valueOf(this.re).longValue();
+        return (long) this.re;
     }
 
     public float floatValue() {
-        return Double.valueOf(this.re).floatValue();
+        return (float) this.re;
     }
 
     public double doubleValue() {
@@ -86,14 +99,14 @@ public class Complex extends Number {
         } else if (!realStr.equals("") && !imagStr.equals("") && this.im > 0) {
             operator = " + ";
         }
-        return (realStr + operator + imagStr).trim().replace("1i", "i");
+        return String.format("Complex (%s)", (realStr + operator + imagStr).trim().replace("1i", "i"));
     }
 
     /**
      * あらゆるNumber型からComplexクラスに変換
      *
      * @param number 数値
-     * @return Complexクラス（numberがComplexならそのまま返す、実数（int, floatなど）の場合は虚部は0）
+     * @return Complexクラス（numberがComplexならnumber自体、実数（int, floatなど）の場合は虚部を0とした複素数型）を返す
      */
     public static Complex valueOf(Number number) {
         return number instanceof Complex z
@@ -130,7 +143,7 @@ public class Complex extends Number {
      * @param summand 足す数
      * @return 和
      */
-    public Complex plus(Number summand) {
+    public Complex add(Number summand) {
         final Complex z = Complex.valueOf(summand);
         return new Complex(this.re + z.re, this.im + z.im);
     }
@@ -141,7 +154,7 @@ public class Complex extends Number {
      * @param subtrahend 引く数
      * @return 差
      */
-    public Complex minus(Number subtrahend) {
+    public Complex subtract(Number subtrahend) {
         final Complex z = Complex.valueOf(subtrahend);
         return new Complex(this.re - z.re, this.im - z.im);
     }
@@ -152,7 +165,7 @@ public class Complex extends Number {
      * @param multiplier かける数
      * @return 積
      */
-    public Complex times(Number multiplier) {
+    public Complex multiply(Number multiplier) {
         final Complex z = Complex.valueOf(multiplier);
         final double realResult = this.re * z.re - this.im * z.im;
         final double imagResult = this.re * z.im + this.im * z.re;
@@ -193,7 +206,7 @@ public class Complex extends Number {
      * @return 商
      * @throws ArithmeticException 引数に0が指定された場合
      */
-    public Complex dividedBy(Number divisor) {
+    public Complex divide(Number divisor) {
         final Complex z = Complex.valueOf(divisor);
         if (z.isZero()) {
             throw AE;
@@ -222,19 +235,17 @@ public class Complex extends Number {
         return Math.sqrt(Math.pow(this.re, 2) + Math.pow(this.im, 2));
     }
 
-    /**
-     * 2つの複素数の値が等しいか
-     *
-     * @param obj 比較対象の複素数
-     * @return 値が等しければ：TRUE
-     */
-    @Override
     public boolean equals(Object obj) {
         if (obj instanceof Number n) {
             final Complex z = Complex.valueOf(n);
             return this.re == z.re && this.im == z.im;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(re, im);
     }
 
     /**
@@ -290,7 +301,7 @@ public class Complex extends Number {
      * @return 複素数
      */
     public Complex tan() {
-        return sin().dividedBy(cos());
+        return sin().divide(cos());
     }
 
     /**
@@ -302,7 +313,7 @@ public class Complex extends Number {
     public Complex pow(int a) {
         Complex result = ONE;
         for (int i = 1; i <= Math.abs(a); i++) {
-            result = a > 0 ? result.times(this) : result.dividedBy(this);
+            result = a > 0 ? result.multiply(this) : result.divide(this);
         }
         return result;
     }
@@ -329,7 +340,7 @@ public class Complex extends Number {
      * @return 逆数
      */
     public Complex reciprocal() {
-        return ONE.dividedBy(this);
+        return ONE.divide(this);
     }
 
     /**
